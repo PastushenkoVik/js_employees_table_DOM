@@ -180,7 +180,7 @@ document.querySelector('thead').addEventListener('click', (e) => {
       let payload = row.querySelectorAll('td')[columnIndex].innerText;
 
       payload = payload.match(/[$]/g)
-        ? parseFloat(payload.replace(/[.$]/, '').replace(',', '.'))
+        ? parseFloat(payload.replace(/[.$]/g, '').replace(',', '.'))
         : payload;
 
       return {
