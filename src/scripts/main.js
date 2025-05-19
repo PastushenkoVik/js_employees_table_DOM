@@ -27,12 +27,12 @@ const newEmployeeFormTemplate = [
   },
   {
     label: 'Age: ',
-    type: 'numeric',
+    type: 'number',
     dataQa: 'age',
   },
   {
     label: 'Salary: ',
-    type: 'numeric',
+    type: 'number',
     dataQa: 'salary',
   },
   {
@@ -48,7 +48,7 @@ newEmployeeFormTemplate.forEach((element) => {
   let newElement;
 
   switch (element.type) {
-    case 'numeric':
+    case 'number':
     case 'text':
       newElement = document.createElement('label');
 
@@ -56,7 +56,7 @@ newEmployeeFormTemplate.forEach((element) => {
 <input
     name="${element.label.toLowerCase().trim().replace(/:/, '')}"
     data-qa="${element.dataQa}"
-    type="text" />`;
+    type="${element.type}" />`;
       break;
 
     case 'select':
@@ -106,7 +106,7 @@ newEmployeeForm.addEventListener('submit', (newEmployeeEvent) => {
       10,
       10,
       'Short name',
-      'The `Name` should be than more than 4 letters',
+      'The `Name` should be at least 4 letters',
       'error',
     );
 
@@ -179,7 +179,7 @@ document.querySelector('thead').addEventListener('click', (e) => {
     .map((row) => {
       let payload = row.querySelectorAll('td')[columnIndex].innerText;
 
-      payload = payload.match(/^[$]/)
+      payload = payload.match(/[$]/g)
         ? parseFloat(payload.replace(/[.$]/, '').replace(',', '.'))
         : payload;
 
